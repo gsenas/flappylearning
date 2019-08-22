@@ -22,6 +22,12 @@ REPLAY_MEMORY = 50000  # number of previous transitions to remember
 BATCH = 32  # size of minibatch
 FRAME_PER_ACTION = 1
 
+#Para comenzar de cero:
+# OBSERVE = 10000
+# EXPLORE = 3000000
+# FINAL_EPSILON = 0.0001
+# INITIAL_EPSILON = 0.1
+
 
 def weight_variable(shape):
     initial = tf.truncated_normal(shape, stddev=0.01)
