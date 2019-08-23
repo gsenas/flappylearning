@@ -32,6 +32,7 @@ PLAYER_INDEX_GEN = cycle([0, 1, 2, 1])
 class GameState:
     def __init__(self):
         self.score = self.playerIndex = self.loopIter = 0
+        self.hiscore = 0
         self.playerx = int(SCREENWIDTH * 0.2)
         self.playery = int((SCREENHEIGHT - PLAYER_HEIGHT) / 2)
         self.basex = 0
@@ -135,6 +136,11 @@ class GameState:
         SCREEN.blit(IMAGES['base'], (self.basex, BASEY))
         # print score so player overlaps the score
         showScore(self.score)
+        showHiScore(self.hiscore)
+
+        if self.score>self.hiscore:
+            self.hiscore=self.score
+
         SCREEN.blit(IMAGES['player'][self.playerIndex],
                     (self.playerx, self.playery))
 
@@ -174,6 +180,16 @@ def showScore(score):
     for digit in scoreDigits:
         SCREEN.blit(IMAGES['numbers'][digit], (Xoffset, SCREENHEIGHT * 0.1))
         Xoffset += IMAGES['numbers'][digit].get_width()
+
+def showHiScore(hiscore):
+    clock = pygame.time.Clock()
+    
+    basicfont = pygame.font.SysFont(None, 18)
+    text = basicfont.render('Hi Score: ' + str(hiscore), True, (255, 100, 100), None)
+    textrect = text.get_rect()
+    textrect.left = 0
+    textrect.top = 0
+    SCREEN.blit(text, textrect)
 
 
 def checkCrash(player, upperPipes, lowerPipes):

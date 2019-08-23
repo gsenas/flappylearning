@@ -88,7 +88,7 @@ def createNetwork():
     return s, readout, h_fc1
 
 
-def trainNetwork(s, readout, h_fc1, sess):
+def trainNetwork(s, readout, h_fc1, sess, hiscore):
     # define the cost function
     a = tf.placeholder("float", [None, ACTIONS])
     y = tf.placeholder("float", [None])
@@ -220,7 +220,7 @@ def trainNetwork(s, readout, h_fc1, sess):
 def playGame():
     sess = tf.InteractiveSession()
     s, readout, h_fc1 = createNetwork()
-    trainNetwork(s, readout, h_fc1, sess)
+    trainNetwork(s, readout, h_fc1, sess, 0)
 
 
 def main():
